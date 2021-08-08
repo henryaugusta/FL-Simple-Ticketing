@@ -37,3 +37,5 @@ Route::post('/user/ticket/create', 'User\TicketController@store');
 Route::get('/user/ticket/pending', 'User\TicketController@viewUserPending');
 Route::get('/user/ticket/progress', 'User\TicketController@viewUserProgress');
 Route::get('/user/ticket/complete', 'User\TicketController@viewUserComplete');
+
+Route::get('/admin/home', 'HomeController@homeAdmin');

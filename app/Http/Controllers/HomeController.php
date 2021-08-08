@@ -32,6 +32,10 @@ class HomeController extends Controller
         if (Auth::user()->role == "3") {
             return redirect("/user/home");
         }
+        // If User is User Admin
+        if (Auth::user()->role == "1") {
+            return redirect("/admin/home");
+        }
 
 
         return view('home.index');
@@ -39,6 +43,10 @@ class HomeController extends Controller
 
     public function homeUser()
     {
-        return view('home.index');
+        return view('home.user');
+    }
+    public function homeAdmin()
+    {
+        return view('home.admin');
     }
 }

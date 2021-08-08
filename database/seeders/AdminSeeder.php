@@ -20,6 +20,7 @@ class AdminSeeder extends Seeder
 
         $this->addUser("Admin", "admin@email.com", "password","1");
         $this->addUser("user", "user@gmail.com", "password","3");
+        $this->addUser("staff", "staff@gmail.com", "password","2");
 
 
         $faker = Faker::create("id_ID");
