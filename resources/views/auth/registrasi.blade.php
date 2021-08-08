@@ -117,8 +117,7 @@
                             <img width="150px" height="150px"
                                 src="{{ URL::to('/bootstrap_ui/') }}/assets/images/big_logo.png" alt="wrapkit">
                         </div>
-                        <h2 class="mt-3 text-center">Sistem Informasi Warehouse Seragam</h2>
-
+                        <h2 class="mt-3 text-center">Helpdesk Sisfo</h2>
 
                         @if (session()->has('error'))
                             <div class="alert alert-primary" role="alert">
@@ -146,16 +145,9 @@
 
 
                             <div class="col-lg-12">
-                                <form action="{{ url('karyawan/tambah') }}" method="post"
+                                <form action="{{ url('user/regis') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
-
-                                    <div class="form-group">
-                                        <label for="">Nomor Induk Karyawan</label>
-                                        <input type="text" class="form-control" required name="nik"
-                                            placeholder="Nomor Induk Karyawan">
-                                        <small class="form-text text-muted">Nomor Induk Karyawan</small>
-                                    </div>
 
                                     <div class="form-group">
                                         <label for="">Nama Karyawan</label>
@@ -173,45 +165,14 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="">Kontak Karyawan</label>
-                                        <input type="text" class="form-control" required name="kontak"
-                                            placeholder="Kontak Karyawan">
-                                        <small class="form-text text-muted">Kontak Karyawan</small>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="">Password Karyawan</label>
+                                        <label for="">Password</label>
                                         <input type="text" class="form-control" required name="password"
-                                            placeholder="Password Karyawan">
-                                        <small class="form-text text-muted">Password Karyawan (Digunakan Untuk
-                                            Login)</small>
+                                            placeholder="Password">
+                                        <small class="form-text text-muted">Password Karyawan</small>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="">Usia Karyawan</label>
-                                        <input type="text" class="form-control" required name="usia"
-                                            placeholder="Usia Karyawan">
-                                        <small class="form-text text-muted">Usia Karyawan</small>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="">Role / Jabatan / Peran</label>
-                                        <select required class="form-control" name="role" id="">
-                                            <option>Pilih Role</option>
-                                            <option value="2">Karyawan</option>
-                                            <option value="1">Admin</option>
-                                            <option value="3">Pemilik</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="">Alamat Karyawan</label>
-                                        <textarea class="form-control" name="alamat" id="" rows="3"
-                                            placeholder="Alamat Karyawan"></textarea>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-block btn-primary mb-4">Tambahkan Data
-                                        Karyawan</button>
+                                    <button type="submit" class="btn btn-block btn-primary mb-4">Registrasi</button>
                                 </form>
                             </div>
 

@@ -47,7 +47,7 @@
                 @endif
 
 
-                @if (Auth::user()->role == 2)
+                @if (Auth::user()->role == 2 || Auth::user()->role == 1)
 
                     <li class="nav-small-cap"><span class="hide-menu">Tracking Status Ticket</span></li>
 
@@ -73,6 +73,12 @@
                             </span>
                         </a>
                     </li>
+
+                    @if (Auth::user()->role == 1)
+
+
+                    @endif
+
                 @endif
 
 

@@ -48,6 +48,18 @@ class TicketController extends Controller
         return view('ticket.manage')->with(compact('ticket_status', 'tickets'));
     }
 
+    public function deleteTicket(Request $request){
+        $object = TicketModel::find($request->id);
+
+        
+        if ($object->delete()) {
+            return redirect('/user/ticket/pending')->with(["success" => "Berhasil Menghapus Ticket"]);
+        } else {
+            return redirect('/user/ticket/pending')->with(["error" => "Gagal Menghapus Ticket"]);
+        }
+
+    }
+
     public function store(Request $request)
     {
         $rules = [
@@ -84,6 +96,14 @@ class TicketController extends Controller
         $object->status = 3;
 
         if ($object->save()) {
+
+            $objectdis = new Discussion();
+            $objectdis->id_sender = Auth::user()->id;
+            $objectdis->message = $request->message;
+            $objectdis->topic = $object->id;
+            $objectdis->save();
+    
+
             return back()->with(["success" => "Berhasil Mengirim Ticket, Silakan Lihat Status pada Menu Tracking"]);
         } else {
             return back()->with(["error" => "Gagal Mengirim Ticket"]);

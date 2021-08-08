@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TicketModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,10 +44,25 @@ class HomeController extends Controller
 
     public function homeUser()
     {
-        return view('home.user');
+        $auth = Auth::user()->id;
+        $totalTicket = TicketModel::all()->where('sender_id','=',$auth)->count();
+        $totalTicketPending =TicketModel::where('sender_id','=',$auth)->where('status','=','3')->count(); 
+        $totalTicketSolved = TicketModel::where('sender_id','=',$auth)->where('status','=','1')->count();
+        $totalTicketProgress = TicketModel::where('sender_id','=',$auth)->where('status','=','2')->count();
+
+        $tickets = TicketModel::all();
+        return view('home.user')
+            ->with(compact('totalTicket', 'totalTicketPending', 'totalTicketSolved', 'totalTicketProgress', 'tickets'));
     }
     public function homeAdmin()
     {
-        return view('home.admin');
+        $totalTicket = TicketModel::all()->count();
+        $totalTicketPending =TicketModel::where('status','=','3')->count(); 
+        $totalTicketSolved = TicketModel::where('status','=','1')->count();
+        $totalTicketProgress = TicketModel::where('status','=','2')->count();
+
+        $tickets = TicketModel::all();
+        return view('home.admin')
+            ->with(compact('totalTicket', 'totalTicketPending', 'totalTicketSolved', 'totalTicketProgress', 'tickets'));
     }
 }

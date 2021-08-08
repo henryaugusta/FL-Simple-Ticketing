@@ -18,7 +18,7 @@ class TicketController extends Controller
                 $status_code = 3;
                 break;
 
-            case 'progess':
+            case 'progress':
                 $status_code = 2;
                 break;
 
@@ -30,10 +30,32 @@ class TicketController extends Controller
                 # code...
                 break;
         }
-        $tickets = TicketModel::where('status', '=', $status_code)
-            ->where('status', '=', 3)->get();
+        $tickets = TicketModel::where('status', '=', $status_code)->get();
         $ticket_status = "Pending";
         return view('ticket.admin.manage')->with(compact('ticket_status', 'tickets'));
+    }
+
+    
+    public function destroy(Request $request){
+        $object = TicketModel::find($request->id);
+        if ($object->delete()) {
+            return redirect('/admin/ticket/pending')->with(["success" => "Berhasil Menghapus Ticket"]);
+        } else {
+            return redirect('/admin/ticket/pending')->with(["error" => "Gagal Menghapus Ticket"]);
+        }
+
+    }
+    
+    public function update_status(Request $request){
+        $object = TicketModel::find($request->id);
+        $object->status=$request->status;
+
+        if ($object->save()) {
+            return back()->with(["success" => "Berhasil Mengubah Status Ticket Ticket"]);
+        } else {
+            return back()->with(["error" => "Gagal Mengubah Status Ticket"]);
+        }
+
     }
 
     public function viewDetail($id){

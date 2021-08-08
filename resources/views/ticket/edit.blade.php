@@ -33,36 +33,47 @@
         </div>
         <div class="card-body">
 
-            <form action="{{ url('admin/ticket/' . $data->id . '/edit') }}" method="post" enctype="multipart/form-data">
+            @csrf
+
+            <div class="d-flex">
+                <h3 class="text-dark mr-2"><strong> Judul Keluhan : </strong></h3>
+                <h3 class="text-dark">{{ $data->ticket_title }}</h3>
+            </div>
+            <h3 class="text-dark mr-1"> <strong> Message Ticket : </strong></h3>
+            <h3 class="text-dark">{{ $data->ticket_detail }}</h3>
+
+            <h4 class="text-dark">Status Ticket : </h4>
+
+            <div class="mt-1">
+                @if ($data->status == 3)
+                    <button id="{{ $data->id }}" type="button" class="btn btn-danger">Pending</button>
+                @endif
+                @if ($data->status == 1)
+                    <button id="{{ $data->id }}" type="button" class="btn btn-success">Completed</button>
+                @endif
+                @if ($data->status == 2)
+                    <button id="{{ $data->id }}" type="button" class="btn btn-primary">Progress</button>
+                @endif
+            </div>
+
+            <h3 class="text-dark mr-1 mt-2"> <strong> Pengirim : </strong></h3>
+            <h3 class="text-dark">{{ $user->name }}</h3>
+            <h3 class="text-dark mr-1"> <strong> Tanggal Dibuat : </strong></h3>
+            <h3 class="text-dark">{{ $data->created_at }}</h3>
+            <form action="{{ url('admin/ticket/' . $data->id . '/update_status') }}" method="post" enctype="multipart/form-data">
                 @csrf
-
-                <div class="d-flex">
-                    <h3 class="text-dark mr-2"><strong> Judul Keluhan : </strong></h3>
-                    <h3 class="text-dark">{{ $data->ticket_title }}</h3>
-                </div>
-                <h3 class="text-dark mr-1"> <strong> Message Ticket : </strong></h3>
-                <h3 class="text-dark">{{ $data->ticket_detail }}</h3>
-
-                <h4 class="text-dark">Status Ticket : </h4>
-
-                <div class="mt-1">
-                    @if ($data->status == 3)
-                        <button id="{{ $data->id }}" type="button" class="btn btn-warning">Pending</button>
-                    @endif
-                    @if ($data->status == 1)
-                        <button id="{{ $data->id }}" type="button" class="btn btn-warning">Completed</button>
-                    @endif
-                    @if ($data->status == 2)
-                        <button id="{{ $data->id }}" type="button" class="btn btn-warning">Progress</button>
-                    @endif
+                <div class="form-group">
+                    <h3 class="text-dark mt-4">Ubah Status Ticket</h3>
+                    <select required class="form-control" name="status" id="">
+                    <option>Pilih Status Baru</option>
+                    <option value="3">Pending</option>
+                    <option value="2">Progress</option>
+                    <option value="1">Selesai</option>
+                  </select>
                 </div>
 
-                <h3 class="text-dark mr-1 mt-2"> <strong> Pengirim : </strong></h3>
-                <h3 class="text-dark">{{ $user->name }}</h3>
-                <h3 class="text-dark mr-1"> <strong> Tanggal Dibuat : </strong></h3>
-                <h3 class="text-dark">{{ $data->created_at }}</h3>
+                <button type="submit" class="btn btn-primary">Simpan Status</button>
             </form>
-
             <hr>
 
         </div>
@@ -75,7 +86,7 @@
         <div class="card-body">
             <div class="chat-box scrollable position-relative ps-container ps-theme-default"
                 style="height: calc(100vh - 300px);" data-ps-id="1456ff32-4cc1-fff2-5065-9da0363bf007">
-                <ul class="chat-list list-style-none px-3 pt-3">
+                <ul class="chat-list list-style-none ">
 
                     @forelse ($discussions as $item)
                         @if ($item->user_detail->role == 2 || $item->user_detail->role == 1)
@@ -95,7 +106,7 @@
                                 <div class="chat-content d-inline-block pl-3">
                                     <h6 class="font-weight-medium"> {{ $item->user_detail->name }}</h6>
                                     <div class="msg p-2 d-inline-block mb-1 chat-text">
-                                        {{ $item->message }}
+                                        <h4> {{ $item->message }} </h4>
                                     </div>
                                     <h6 class="">{{ $item->created_at }}</h6>
                                 </div>
@@ -104,9 +115,9 @@
 
                     @empty
 
-                    <div class="alert alert-primary" role="alert">
-                        <strong>Belum Ada Diskusi/Tanggapan, Silakan Menambahkan Pesan Melalui Kolom Dibawah</strong>
-                    </div>
+                        <div class="alert alert-primary" role="alert">
+                            <strong>Belum Ada Diskusi/Tanggapan, Silakan Menambahkan Pesan Melalui Kolom Dibawah</strong>
+                        </div>
                     @endforelse
 
 

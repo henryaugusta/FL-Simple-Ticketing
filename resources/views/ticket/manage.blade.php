@@ -8,7 +8,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item text-muted active" aria-current="page">Ticket</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">{{$ticket_status}} Ticket</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">{{ $ticket_status }} Ticket</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
 
     <div class="card border-primary">
         <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">{{$ticket_status}} Ticket</h4>
+            <h4 class="mb-0 text-white">{{ $ticket_status }} Ticket</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -50,17 +50,17 @@
                                 <td>{{ $item->ticket_title }}</td>
                                 <td>{{ $item->ticket_detail }}</td>
                                 <td>
-                                    @if ($item->status==3)
-                                    <button id="{{ $item->id }}" type="button"
-                                        class="btn btn-warning">Pending</button>
+                                    @if ($item->status == 3)
+                                        <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-warning">Pending</button>
                                     @endif
-                                    @if ($item->status==1)
-                                    <button id="{{ $item->id }}" type="button"
-                                        class="btn btn-warning">Completed</button>
+                                    @if ($item->status == 1)
+                                        <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-success">Completed</button>
                                     @endif
-                                    @if ($item->status==2)
-                                    <button id="{{ $item->id }}" type="button"
-                                        class="btn btn-warning">Progress</button>
+                                    @if ($item->status == 2)
+                                        <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-primary">Progress</button>
                                     @endif
                                 </td>
                                 <td>
@@ -160,7 +160,7 @@ src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></sc
 
         $('body').on("click", ".btn-delete", function() {
             var id = $(this).attr("id")
-            $(".btn-destroy").attr("href", window.location.origin + "/supplier/" + id + "/delete")
+            $(".btn-destroy").attr("href", window.location.origin + "/user/ticket/" + id + "/delete")
             $("#destroy-modal").modal("show")
         });
 

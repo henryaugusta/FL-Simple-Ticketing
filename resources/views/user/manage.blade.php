@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Ticket</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Karyawan</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Ticket</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">{{ $ticket_status }} Ticket</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Karyawan</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Manage</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
 
     <div class="card border-primary">
         <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">{{ $ticket_status }} Ticket</h4>
+            <h4 class="mb-0 text-white">Manage User Toko</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -37,39 +37,46 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>No</th>
-                            <th>Judul Ticket</th>
-                            <th>Deskripsi Ticket</th>
-                            <th>Status</th>
-                            <th>Detail Data</th>
+                            <th>Nama User</th>
+                            <th>Role</th>
+                            <th>Email</th>
+                            <th>Usia</th>
+                            <th>Alamat</th>
+                            <th>Kontak</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($tickets as $item)
+
+
+
+                        @forelse ($user as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->ticket_title }}</td>
-                                <td>{{ $item->ticket_detail }}</td>
+                                <td>{{ $item->name }}</td>
                                 <td>
-                                    @if ($item->status == 3)
-                                        <button type="button"
-                                            class="btn waves-effect waves-light btn-rounded btn-warning">Pending</button>
+                                    @if ($item->role == '1')
+                                        Admin
                                     @endif
-                                    @if ($item->status == 1)
-                                        <button type="button"
-                                            class="btn waves-effect waves-light btn-rounded btn-success">Completed</button>
+                                    @if ($item->role == '2')
+                                        Karyawan
                                     @endif
-                                    @if ($item->status == 2)
-                                        <button type="button"
-                                            class="btn waves-effect waves-light btn-rounded btn-primary">Progress</button>
+                                    @if ($item->role == '3')
+                                        Pemilik
                                     @endif
                                 </td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->usia }}</td>
+                                <td>{{ $item->alamat }}</td>
+                                <td>{{ $item->kontak }}</td>
                                 <td>
                                     <div class="d-flex">
                                         <button id="{{ $item->id }}" type="button"
-                                            class="btn btn-danger btn-delete mr-2">Batalkan Ticket</button>
-                                        <a href="{{ url('admin/ticket' . '/' . $item->id . '/edit') }}">
-                                            <button type="button" class="btn btn-primary">Beri Respon</button>
+                                            class="btn btn-danger btn-delete mr-2">Hapus Karyawan</button>
+                                        <a href="{{url('/karyawan'.'/'.$item->id.'/edit')}}">
+                                            <button type="button" class="btn btn-primary">Edit</button>
                                         </a>
+
                                     </div>
                                 </td>
                             </tr>
@@ -95,7 +102,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Membatalkan Ticket Ini ?</h5>
+                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin User Ini , Semua Daftar
+                        Transaksi Yang Melibatkan User Akan Dihapus ??</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -151,7 +159,7 @@ src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></sc
                 'copyHtml5',
                 {
                     extend: 'excelHtml5',
-                    title: 'Data Ticket Export {{ \Carbon\Carbon::now()->year }}'
+                    title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
                 },
                 'csvHtml5',
             ],
@@ -160,7 +168,7 @@ src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></sc
 
         $('body').on("click", ".btn-delete", function() {
             var id = $(this).attr("id")
-            $(".btn-destroy").attr("href", window.location.origin + "/admin/ticket/" + id + "/delete")
+            $(".btn-destroy").attr("href", window.location.origin + "/karyawan/" + id + "/delete")
             $("#destroy-modal").modal("show")
         });
 
@@ -170,6 +178,30 @@ src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></sc
             $("#insert-modal").modal("show")
         });
 
+
+        // Edit & Update
+        $('body').on("click", ".btn-edit", function() {
+            var id = $(this).attr("id")
+            $.ajax({
+                url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
+                method: "GET",
+                success: function(response) {
+                    $("#edit-modal").modal("show")
+                    console.log(response)
+                    $("#id").val(response.id)
+                    $("#name").val(response.judul)
+                    $("#edit_date").val(response.tanggal)
+                    $("#role").val(response.role)
+                }
+            })
+        });
+
+        // Reset Password
+        $('body').on("click", ".btn-res-pass", function() {
+            var id = $(this).attr("id")
+            $(".btn-reset").attr("id", id)
+            $("#reset-password-modal").modal("show")
+        });
 
     });
 </script>
