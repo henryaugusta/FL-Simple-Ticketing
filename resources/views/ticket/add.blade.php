@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Supplier</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Ticket</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Supplier</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Tambah Supplier</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Ticket</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Kirim Ticket</li>
                     </ol>
                 </nav>
             </div>
@@ -29,36 +29,29 @@
 
     <div class="card border-success">
         <div class="card-header bg-success">
-            <h4 class="mb-0 text-white">Tambah Supplier</h4>
+            <h4 class="mb-0 text-white">Buat Ticket Helpdesk</h4>
         </div>
         <div class="card-body">
-            <h3 class="card-title">Input Data Supplier</h3>
+            <h3 class="card-title">Buat Ticket Helpdesk</h3>
 
             <hr>
 
-            <form action="{{ url('supplier/tambah') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('user/ticket/buat') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
-
                 <div class="form-group">
-                    <label for="">Nama Supplier</label>
-                    <input type="text" class="form-control" required name="nama" placeholder="Nama Supplier">
-                    <small class="form-text text-muted">Nama Supplier</small>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="">Kontak Supplier</label>
-                    <input type="text" class="form-control" required name="kontak" placeholder="Kontak Supplier">
-                    <small class="form-text text-muted">Kontak Supplier</small>
+                    <label for="">Judul Ticket</label>
+                    <input type="text" class="form-control" required name="title_ticket" value="{{old('title_ticket')}}" placeholder="Judul Ticket">
+                    <small class="form-text text-muted">Judul Ticket</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="">Alamat Supplier</label>
-                    <textarea class="form-control" name="alamat" id="" rows="3" placeholder="Alamat Supplier"></textarea>
+                    <label for="">Message / Deskripsi</label>
+                    <textarea class="form-control" name="message" id="" rows="5" placeholder="Message / Deskripsi Ticket" value="{{old('message')}}"></textarea>
+                    <small class="form-text text-muted">Message / Deskripsi</small>
                 </div>
 
-                <button type="submit" class="btn btn-block btn-primary">Tambah Supplier Baru</button>
+                <button type="submit" class="btn btn-block btn-primary">Kirim Ticket</button>
             </form>
         </div>
     </div>

@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Supplier</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Ticket</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Supplier</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Manage</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Ticket</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">{{$ticket_status}} Ticket</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
 
     <div class="card border-primary">
         <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">Manage Supplier</h4>
+            <h4 class="mb-0 text-white">{{$ticket_status}} Ticket</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -37,19 +37,32 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>No</th>
-                            <th>Nama Supplier</th>
-                            <th>Kontak</th>
-                            <th>Alamat</th>
-                            <th>Edit Data</th>
+                            <th>Judul Ticket</th>
+                            <th>Deskripsi Ticket</th>
+                            <th>Status</th>
+                            <th>Detail Data</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($supplier as $item)
+                        @forelse ($tickets as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nama_toko }}</td>
-                                <td>{{ $item->kontak }}</td>
-                                <td>{{ $item->alamat }}</td>
+                                <td>{{ $item->ticket_title }}</td>
+                                <td>{{ $item->ticket_detail }}</td>
+                                <td>
+                                    @if ($item->status==3)
+                                    <button id="{{ $item->id }}" type="button"
+                                        class="btn btn-warning">Pending</button>
+                                    @endif
+                                    @if ($item->status==1)
+                                    <button id="{{ $item->id }}" type="button"
+                                        class="btn btn-warning">Completed</button>
+                                    @endif
+                                    @if ($item->status==2)
+                                    <button id="{{ $item->id }}" type="button"
+                                        class="btn btn-warning">Progress</button>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="d-flex">
                                         <button id="{{ $item->id }}" type="button"
@@ -57,7 +70,6 @@
                                         <a href="{{ url('/supplier' . '/' . $item->id . '/edit') }}">
                                             <button type="button" class="btn btn-primary">Edit</button>
                                         </a>
-
                                     </div>
                                 </td>
                             </tr>

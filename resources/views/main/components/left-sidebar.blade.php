@@ -14,7 +14,7 @@
                 <li class="nav-small-cap"><span class="hide-menu">Buat Ticket</span></li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('user/ticket/buat') }}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ URL('user/ticket/create') }}" aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
                         <span class="hide-menu">Kirim Ticket Baru
                         </span>
@@ -24,22 +24,22 @@
                 <li class="nav-small-cap"><span class="hide-menu">Tracking Status Ticket</span></li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('supplier/tambah') }}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ URL('user/ticket/pending') }}" aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
                         <span class="hide-menu">Pending
                         </span>
                     </a>
                 </li>
-                
+
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('supplier/tambah') }}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ URL('user/ticket/progress') }}" aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
                         <span class="hide-menu">Progress
                         </span>
                     </a>
                 </li>
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('supplier/tambah') }}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ URL('user/ticket/complete') }}" aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
                         <span class="hide-menu">Complete
                         </span>
@@ -68,8 +68,6 @@
                     </li>
                 @endif
 
-
-    
 
 
                 <li class="list-divider"></li>

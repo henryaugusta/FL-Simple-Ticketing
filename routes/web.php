@@ -32,3 +32,8 @@ Route::view('registrasi','auth.registrasi');
 Route::post('/login/proc', 'Auth\LoginController@checkLogin');
 
 Route::get('/user/home', 'HomeController@homeUser');
+Route::get('/user/ticket/create', 'User\TicketController@viewCreate');
+Route::post('/user/ticket/create', 'User\TicketController@store');
+Route::get('/user/ticket/pending', 'User\TicketController@viewUserPending');
+Route::get('/user/ticket/progress', 'User\TicketController@viewUserProgress');
+Route::get('/user/ticket/complete', 'User\TicketController@viewUserComplete');

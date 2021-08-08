@@ -17,7 +17,6 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger("sender_id");
-            $table->string("account_type")->nullable();
             $table->string("ticket_title")->nullable();
             $table->string("ticket_detail")->nullable();
             $table->string("ticket_photo")->nullable();
