@@ -67,8 +67,8 @@
                                     <div class="d-flex">
                                         <button id="{{ $item->id }}" type="button"
                                             class="btn btn-danger btn-delete mr-2">Batalkan Ticket</button>
-                                        <a href="{{ url('user/ticket' . '/' . $item->id . '/edit') }}">
-                                            <button type="button" class="btn btn-primary">Edit</button>
+                                        <a href="{{ url('admin/ticket' . '/' . $item->id . '/edit') }}">
+                                            <button type="button" class="btn btn-primary">Beri Respon</button>
                                         </a>
                                     </div>
                                 </td>
@@ -151,7 +151,7 @@ src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></sc
                 'copyHtml5',
                 {
                     extend: 'excelHtml5',
-                    title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
+                    title: 'Data Ticket Export {{ \Carbon\Carbon::now()->year }}'
                 },
                 'csvHtml5',
             ],

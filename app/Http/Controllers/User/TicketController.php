@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Discussion;
 use App\Models\TicketModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,6 +16,15 @@ class TicketController extends Controller
     {
         return view('ticket.add');
     }
+
+    public function viewDetail($id){
+        $data = TicketModel::find($id);
+        $user = User::find($data->sender_id);
+        $discussions= Discussion::where('topic','=',$id)->get();
+
+        return view('ticket.edit')->with(compact('data','user','discussions'));
+    }
+
 
     public function viewUserPending()
     {

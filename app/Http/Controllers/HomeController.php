@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         // If User is Karyawan
         if (Auth::user()->role == "2") {
-            return  redirect("/logout");
+            return redirect("/operator/home");
         }
         // If User is User Biasa / Pengirim Ticket
         if (Auth::user()->role == "3") {

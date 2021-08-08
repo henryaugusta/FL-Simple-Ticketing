@@ -37,5 +37,19 @@ Route::post('/user/ticket/create', 'User\TicketController@store');
 Route::get('/user/ticket/pending', 'User\TicketController@viewUserPending');
 Route::get('/user/ticket/progress', 'User\TicketController@viewUserProgress');
 Route::get('/user/ticket/complete', 'User\TicketController@viewUserComplete');
+Route::get('/user/ticket/{id}/edit', 'User\TicketController@viewDetail');
+
 
 Route::get('/admin/home', 'HomeController@homeAdmin');
+Route::get('/admin/ticket/{status}', 'Admin\TicketController@viewManage');
+
+Route::get('/operator/home', 'HomeController@homeAdmin');
+
+Route::get('/process/ticket/{status}', 'Admin\TicketController@viewManage');
+Route::get('/process/ticket/{status}', 'Admin\TicketController@viewManage');
+Route::get('/process/ticket/{status}', 'Admin\TicketController@viewManage');
+
+Route::get('/admin/ticket/{id}/edit', 'Admin\TicketController@viewDetail');
+
+Route::post('ticket/discussion/{id}/post', 'DiscussionController@store');
+

@@ -36,7 +36,7 @@
 
             <hr>
 
-            <form action="{{ url('user/ticket/buat') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('user/ticket/create') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
