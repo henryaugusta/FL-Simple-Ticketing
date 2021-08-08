@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\User;
+use Exception;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class AdminSeeder extends Seeder
 {
@@ -15,27 +17,29 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $data = new User();
-        $data->name = "Muhammad Firriezky";
-        $data->email = "firriezky@gmail.com";
-        $data->kontak = "088223738709";
-        $data->nip = "1202184264";
-        $data->usia = "20";
-        $data->alamat = "Bojongsoang";
-        $data->password = bcrypt("bojonggede");
-        $data->role = "1";
-        $data->save();
 
+        $this->addUser("Admin", "admin@email.com", "password","1");
+        $this->addUser("user", "user@gmail.com", "password","3");
+
+
+        $faker = Faker::create("id_ID");
+        for ($i = 0; $i < 300; $i++) {
+            try {
+                $role = $faker->randomElement([2, 3]);
+                $this->addUser($faker->name, $faker->email, "password",$role);
+            } catch (Exception $exception) {
+                continue;
+            }
+        }
+    }
+
+    public function addUser($name, $email, $password, $role)
+    {
         $data = new User();
-        $data->name = "Admin";
-        $data->email = "admin@gmail.com";
-        $data->kontak = "088223738710";
-        $data->nip = "1202184264";
-        $data->usia = "20";
-        $data->alamat = "Bojongsoang";
-        $data->password = bcrypt("bojonggede");
-        $data->role = "1";
+        $data->name = $name;
+        $data->email = $email;
+        $data->password = bcrypt($password);
+        $data->role = $role;
         $data->save();
-  
     }
 }

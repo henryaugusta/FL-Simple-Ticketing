@@ -9,6 +9,45 @@
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="list-divider"></li>
 
+                @if (Auth::user()->role == 3)
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Buat Ticket</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('user/ticket/buat') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Kirim Ticket Baru
+                        </span>
+                    </a>
+                </li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Tracking Status Ticket</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('supplier/tambah') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Pending
+                        </span>
+                    </a>
+                </li>
+                
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('supplier/tambah') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Progress
+                        </span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('supplier/tambah') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Complete
+                        </span>
+                    </a>
+                </li>
+            @endif
+
+
                 @if (Auth::user()->role != 2)
 
                 <li class="nav-small-cap"><span class="hide-menu">Manage Karyawan</span></li>
@@ -30,27 +69,7 @@
                 @endif
 
 
-                @if (Auth::user()->role != 2)
-
-
-                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Manage Supplier</span></li>
-
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('supplier/tambah') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Tambah Supplier
-                            </span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('supplier/manage') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Manage/Edit Supplier
-                            </span>
-                        </a>
-                    </li>
-                @endif
+    
 
 
                 <li class="list-divider"></li>

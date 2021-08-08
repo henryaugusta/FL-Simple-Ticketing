@@ -58,7 +58,7 @@
 
         @include('main.components.topbar-all')
 
-        @include('main.components.left-sidebar-admin')
+        @include('main.components.left-sidebar')
 
 
         <!-- ============================================================== -->
