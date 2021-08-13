@@ -61,3 +61,10 @@ Route::get('/admin/ticket/{id}/edit', 'Admin\TicketController@viewDetail');
 
 Route::post('ticket/discussion/{id}/post', 'DiscussionController@store');
 
+Route::get('/karyawan/tambah', 'KaryawanController@viewAddKaryawan');
+Route::post('/karyawan/tambah', 'KaryawanController@store');
+Route::get('/karyawan/manage', 'KaryawanController@viewManage');
+Route::get('/karyawan/{id}/delete', 'KaryawanController@destroy');
+Route::get('/karyawan/{id}/edit', 'KaryawanController@viewEdit');
+Route::post('/karyawan/{id}/edit', 'KaryawanController@edit');
+

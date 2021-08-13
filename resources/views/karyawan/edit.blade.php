@@ -3,11 +3,11 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Karyawan</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Pengguna</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Karyawan</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Pengguna</li>
                         <li class="breadcrumb-item text-muted" aria-current="page">Edit</li>
                     </ol>
                 </nav>
@@ -29,19 +29,14 @@
 
     <div class="card border-success">
         <div class="card-header bg-success">
-            <h4 class="mb-0 text-white">Edit Karyawan Perusahaan</h4>
+            <h4 class="mb-0 text-white">Edit Pengguna</h4>
         </div>
         <div class="card-body">
-            <h3 class="card-title">Edit Karyawan Perusahaan</h3>
+            <h3 class="card-title">Edit Pengguna</h3>
             <hr>
             <form action="{{ url('karyawan/'.$karyawan->id.'/edit') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                    <label for="">Nomor Induk Karyawan</label>
-                    <input type="text" class="form-control" required name="nik" value="{{ $karyawan->nip }}"
-                        placeholder="Nomor Induk Karyawan">
-                    <small class="form-text text-muted">Nomor Induk Karyawan</small>
-                </div>
+             
 
                 <div class="form-group">
                     <label for="">Nama Karyawan</label>
@@ -57,19 +52,6 @@
                     <small class="form-text text-muted">Email Karyawan (Digunakan Untuk Login)</small>
                 </div>
 
-                <div class="form-group">
-                    <label for="">Kontak Karyawan</label>
-                    <input type="text" class="form-control" required name="kontak" value="{{ $karyawan->kontak }}"
-                        placeholder="Kontak Karyawan">
-                    <small class="form-text text-muted">Kontak Karyawan</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Usia Karyawan</label>
-                    <input type="text" class="form-control" required name="usia" value="{{ $karyawan->usia }}"
-                        placeholder="Usia Karyawan">
-                    <small class="form-text text-muted">Usia Karyawan</small>
-                </div>
 
                 <div class="form-group">
                     <label for="">Role / Jabatan / Peran</label>
@@ -79,11 +61,6 @@
                         <option @if ($karyawan->role == '1') selected @endif value="1">Admin</option>
                         <option @if ($karyawan->role == '3') selected @endif value="3">Pemilik Toko</option>
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Alamat Karyawan</label>
-                    <textarea class="form-control" name="alamat" id="" rows="3" placeholder="Alamat Karyawan">{{$karyawan->alamat}}</textarea>
                 </div>
 
                 <button type="submit" class="btn btn-block btn-primary">Simpan Perubahan</button>

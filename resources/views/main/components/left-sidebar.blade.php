@@ -75,7 +75,23 @@
                     </li>
 
                     @if (Auth::user()->role == 1)
+                        <li class="nav-small-cap"><span class="hide-menu">Karyawan & User</span></li>
 
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="{{ URL('karyawan/tambah') }}" aria-expanded="false">
+                                <i data-feather="tag" class="feather-icon"></i>
+                                <span class="hide-menu">Tambah User
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="{{ URL('karyawan/manage') }}" aria-expanded="false">
+                                <i data-feather="tag" class="feather-icon"></i>
+                                <span class="hide-menu">Manage User
+                                </span>
+                            </a>
+                        </li>
 
                     @endif
 

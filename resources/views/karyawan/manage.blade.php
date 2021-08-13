@@ -40,9 +40,6 @@
                             <th>Nama User</th>
                             <th>Role</th>
                             <th>Email</th>
-                            <th>Usia</th>
-                            <th>Alamat</th>
-                            <th>Kontak</th>
                             <th>Edit</th>
                         </tr>
                     </thead>
@@ -66,9 +63,6 @@
                                     @endif
                                 </td>
                                 <td>{{ $item->email }}</td>
-                                <td>{{ $item->usia }}</td>
-                                <td>{{ $item->alamat }}</td>
-                                <td>{{ $item->kontak }}</td>
                                 <td>
                                     <div class="d-flex">
                                         <button id="{{ $item->id }}" type="button"
