@@ -16,8 +16,12 @@ class CreateDiscussionsTable extends Migration
         Schema::create('discussions', function (Blueprint $table) {
             $table->id();
             $table->string('message')->nullable();
-            $table->unsignedBigInteger('topic');
-            $table->unsignedBigInteger('id_sender');
+            $table->string('type')->nullable();
+            $table->string('is_deleted')->nullable();
+            $table->string('is_send')->nullable();
+            $table->string('is_read')->nullable();
+            $table->unsignedBigInteger('topic')->nullable();
+            $table->unsignedBigInteger('id_sender')->nullable();
             $table->foreign('id_sender')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('topic')->references('id')->on('tickets')->onDelete('cascade');
             $table->timestamps();

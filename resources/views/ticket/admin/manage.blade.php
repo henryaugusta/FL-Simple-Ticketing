@@ -40,6 +40,7 @@
                             <th>Judul Ticket</th>
                             <th>Deskripsi Ticket</th>
                             <th>Status</th>
+                            <th>Operator Ticket</th>
                             <th>Detail Data</th>
                         </tr>
                     </thead>
@@ -51,18 +52,34 @@
                                 <td>{{ $item->ticket_detail }}</td>
                                 <td>
                                     @if ($item->status == 3)
-                                        <button type="button"
-                                            class="btn waves-effect waves-light btn-rounded btn-warning">Pending</button>
+                                        <button type="button" id="{{ $item->id }}"
+                                            class="btn waves-effect btn-delegate waves-light btn-rounded btn-warning">Pending</button>
                                     @endif
                                     @if ($item->status == 1)
-                                        <button type="button"
-                                            class="btn waves-effect waves-light btn-rounded btn-success">Completed</button>
+                                        <button type="button" id="{{ $item->id }}"
+                                            class="btn waves-effect btn-delegate waves-light btn-rounded btn-success">Completed</button>
                                     @endif
                                     @if ($item->status == 2)
-                                        <button type="button"
-                                            class="btn waves-effect waves-light btn-rounded btn-primary">Progress</button>
+                                        <button type="button" id="{{ $item->id }}"
+                                            class="btn waves-effect btn-delegate waves-light btn-rounded btn-primary">Progress</button>
                                     @endif
                                 </td>
+
+                                @if ($item->operator != null)
+                                    <td>{{ $item->operator->name }} <br>
+                                         <span id="{{$item->id}}" class="text-primary btn-delegate" style="cursor:pointer">(Ganti)</span>
+                                    </td>
+
+
+                                @endif
+
+                                @if ($item->operator == null)
+                                    <td>
+                                        <button type="button" id="{{ $item->id }}"
+                                            class="btn btn-delegate btn-block waves-light btn-rounded btn-light txt-dark">Proses
+                                        </button>
+                                    </td>
+                                @endif
                                 <td>
                                     <div class="d-flex">
                                         <button id="{{ $item->id }}" type="button"
@@ -113,66 +130,107 @@
     </div>
     <!-- Destroy Modal -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="modal-delegate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delegasi / Handover Ticket</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url('/ticket/delegate') }}" method="post">
+                        @csrf
+                        <input type="hidden" id="id_ticket_delegate" name="id">
+                        Delegasikan Ticket Kepada :
+                        <div class="form-group">
+                            <label for="">Operator Ticket</label>
+                            <select required class="form-control" name="delegate_id" id="">
+                                @forelse ($operators as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @empty
+
+                                @endforelse
+                            </select>
+
+                            <button type="submit" id="" class="btn mt-4 btn-primary btn-block">Handover Ticket</button>
+                    </form>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+
+
 
 @endsection
 
 
 @section('app-script')
-<script type="text/javascript"
-src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
-</script>
-<script type="text/javascript" charset="utf8"
-src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
-</script>
-<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
-</script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
-</script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
+    </script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
+    </script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
+    </script>
 
 
 
 
-<script type="text/javascript">
-    $(function() {
-        var table = $('#table_data').DataTable({
-            processing: true,
-            serverSide: false,
-            columnDefs: [{
-                orderable: true,
-                targets: 0
-            }],
-            dom: 'T<"clear">lfrtip<"bottom"B>',
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                'copyHtml5',
-                {
-                    extend: 'excelHtml5',
-                    title: 'Data Ticket Export {{ \Carbon\Carbon::now()->year }}'
-                },
-                'csvHtml5',
-            ],
+    <script type="text/javascript">
+        $(function() {
+            var table = $('#table_data').DataTable({
+                processing: true,
+                serverSide: false,
+                columnDefs: [{
+                    orderable: true,
+                    targets: 0
+                }],
+                dom: 'T<"clear">lfrtip<"bottom"B>',
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                buttons: [
+                    'copyHtml5',
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Data Ticket Export {{ \Carbon\Carbon::now()->year }}'
+                    },
+                    'csvHtml5',
+                ],
+
+            });
+
+            $('body').on("click", ".btn-delete", function() {
+                var id = $(this).attr("id")
+                $(".btn-destroy").attr("href", window.location.origin + "/admin/ticket/" + id + "/delete")
+                $("#destroy-modal").modal("show")
+            });
+
+            $('body').on("click", ".btn-delegate", function() {
+                var id = $(this).attr("id")
+                document.getElementById("id_ticket_delegate").value = id;
+                $("#modal-delegate").modal("show")
+            });
+
+            $('body').on("click", ".btn-add-new", function() {
+                var id = $(this).attr("id")
+                $(".btn-destroy").attr("id", id)
+                $("#insert-modal").modal("show")
+            });
+
 
         });
-
-        $('body').on("click", ".btn-delete", function() {
-            var id = $(this).attr("id")
-            $(".btn-destroy").attr("href", window.location.origin + "/admin/ticket/" + id + "/delete")
-            $("#destroy-modal").modal("show")
-        });
-
-        $('body').on("click", ".btn-add-new", function() {
-            var id = $(this).attr("id")
-            $(".btn-destroy").attr("id", id)
-            $("#insert-modal").modal("show")
-        });
-
-
-    });
-</script>
+    </script>
 
 
 

@@ -92,6 +92,7 @@ class TicketController extends Controller
 
         $object->sender_id = Auth::user()->id;
         $object->ticket_title = $request->title_ticket;
+        $object->category= $request->category;
         $object->ticket_detail = $request->message;
         $object->status = 3;
 

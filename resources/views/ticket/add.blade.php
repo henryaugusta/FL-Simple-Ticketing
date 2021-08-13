@@ -46,6 +46,19 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="">Kategori Keluhan</label>
+                  <select required class="form-control" name="category" id="">
+                    <option>Pilih Kategori</option>
+                    <option value="1">Masalah jaringan</option>
+                    <option value="2">Masalah email</option>
+                    <option value="3">Masalah laptop</option>
+                    <option value="4">Masalah printer</option>
+                    <option value="5">Masalah aplikasi</option>
+                    <option value="0">Lainnya ( Lengkapi pada kolom dibawah )</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
                     <label for="">Message / Deskripsi</label>
                     <textarea class="form-control" name="message" id="" rows="5" placeholder="Message / Deskripsi Ticket" value="{{old('message')}}"></textarea>
                     <small class="form-text text-muted">Message / Deskripsi</small>

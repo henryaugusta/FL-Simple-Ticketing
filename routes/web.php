@@ -51,8 +51,6 @@ Route::get('/admin/ticket/{status}', 'Admin\TicketController@viewManage');
 Route::get('/operator/home', 'HomeController@homeAdmin');
 
 Route::get('/process/ticket/{status}', 'Admin\TicketController@viewManage');
-Route::get('/process/ticket/{status}', 'Admin\TicketController@viewManage');
-Route::get('/process/ticket/{status}', 'Admin\TicketController@viewManage');
 Route::get('/admin/ticket/{id}/delete', 'Admin\TicketController@destroy');
 Route::post('/admin/ticket/{id}/update_status', 'Admin\TicketController@update_status');
 
@@ -60,6 +58,8 @@ Route::post('/admin/ticket/{id}/update_status', 'Admin\TicketController@update_s
 Route::get('/admin/ticket/{id}/edit', 'Admin\TicketController@viewDetail');
 
 Route::post('ticket/discussion/{id}/post', 'DiscussionController@store');
+Route::post('ticket/delegate', 'Admin\TicketController@delegate');
+
 
 Route::get('/karyawan/tambah', 'KaryawanController@viewAddKaryawan');
 Route::post('/karyawan/tambah', 'KaryawanController@store');

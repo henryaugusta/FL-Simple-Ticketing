@@ -9,4 +9,12 @@ class TicketModel extends Model
 {
     protected $table ="tickets";
     use HasFactory;
+
+    
+    protected $append = ['operator'];
+    
+    function getOperatorAttribute()
+    {
+        return User::find($this->delegate_id);
+    }
 }

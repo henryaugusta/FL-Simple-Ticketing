@@ -11,11 +11,8 @@ class RegistrasiController extends Controller
     public function store(Request $request){
 
 
-
-        dd($request->all());
-
         $object = new User();
-        $object->nama = $request->nama;
+        $object->name = $request->nama;
         $object->email = $request->email;
         $object->password = bcrypt($request->password);
         $object->role = 3;
@@ -26,7 +23,6 @@ class RegistrasiController extends Controller
             return back()->with(["error" => "Registrasi Gagal."]);
         }
         
-
 
     }
 

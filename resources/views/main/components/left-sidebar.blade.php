@@ -74,6 +74,20 @@
                         </a>
                     </li>
 
+
+                    @if (Auth::user()->role == 2)
+                        <li class="nav-small-cap"><span class="hide-menu">Pekerjaan Saya</span></li>
+
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="{{ URL('process/ticket/mywork') }}" aria-expanded="false">
+                                <i data-feather="tag" class="feather-icon"></i>
+                                <span class="hide-menu">Delegasi Tiket Saya
+                                </span>
+                            </a>
+                        </li>
+
+                    @endif
+
                     @if (Auth::user()->role == 1)
                         <li class="nav-small-cap"><span class="hide-menu">Karyawan & User</span></li>
 

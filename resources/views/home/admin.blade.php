@@ -29,53 +29,189 @@
     <!-- ============================================================== -->
 
 
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- *************************************************************** -->
+        <!-- Start First Cards -->
+        <!-- *************************************************************** -->
+        <div class="card-group">
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <div class="d-inline-flex align-items-center">
+                                <h2 class="text-dark mb-1 font-weight-medium">{{ $totalUser }}</h2>
+                                {{-- <span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span> --}}
+                            </div>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Pengguna</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium">{{ $totalUserUser }}</h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">User
+                            </h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <div class="d-inline-flex align-items-center">
+                                <h2 class="text-dark mb-1 font-weight-medium">{{ $totalUserOperator }}</h2>
+                                {{-- <span class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span> --}}
+                            </div>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Operator</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    @include('main.components.message')
-
-    <div class="row">
-        <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="p-2 bg-primary text-center">
-                                    <h1 class="font-light text-white">{{ $totalTicket }}</h1>
-                                    <h6 class="text-white">Total Tickets</h6>
-                                </div>
-                            </div>
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 font-weight-medium">{{ $totalUserAdmin }}</h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Admin</h6>
                         </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="p-2 bg-cyan text-center">
-                                    <h1 class="font-light text-white">{{ $totalTicketProgress }}</h1>
-                                    <h6 class="text-white">Diproses</h6>
-                                </div>
-                            </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="globe"></i></span>
                         </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="p-2 bg-success text-center">
-                                    <h1 class="font-light text-white">{{ $totalTicketSolved }}</h1>
-                                    <h6 class="text-white">Completed</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-3 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="p-2 bg-danger text-center">
-                                    <h1 class="font-light text-white">{{ $totalTicketPending }}</h1>
-                                    <h6 class="text-white">Pending</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- *************************************************************** -->
+        <!-- End First Cards -->
+        <!-- *************************************************************** -->
 
+
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="p-2 bg-primary text-center">
+                        <h1 class="font-light text-white">{{ $totalTicket }}</h1>
+                        <h6 class="text-white">Total Tickets</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="p-2 bg-cyan text-center">
+                        <h1 class="font-light text-white">{{ $totalTicketProgress }}</h1>
+                        <h6 class="text-white">Diproses</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="p-2 bg-success text-center">
+                        <h1 class="font-light text-white">{{ $totalTicketSolved }}</h1>
+                        <h6 class="text-white">Completed</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6 col-lg-3 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="p-2 bg-danger text-center">
+                        <h1 class="font-light text-white">{{ $totalTicketPending }}</h1>
+                        <h6 class="text-white">Pending</h6>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+        </div>
+
+        <!-- *************************************************************** -->
+        <!-- Start Sales Charts Section -->
+        <!-- *************************************************************** -->
+        <div class="row">
+
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Jumlah Pengguna</h4>
+                        <div id="user_graphic" class="mt-2" style="height:283px; width:100%;"></div>
+                        <ul class="list-style-none mb-0">
+                            <li>
+                                <i class="fas fa-circle text-primary font-10 mr-2"></i>
+                                <span class="text-muted">Admin</span>
+                                <span class="text-dark float-right font-weight-medium">{{$totalUserAdmin}}</span>
+                            </li>
+                            <li class="mt-3">
+                                <i class="fas fa-circle text-danger font-10 mr-2"></i>
+                                <span class="text-muted">User</span>
+                                <span class="text-dark float-right font-weight-medium">{{$totalUserUser}}</span>
+                            </li>
+                            <li class="mt-3">
+                                <i class="fas fa-circle text-cyan font-10 mr-2"></i>
+                                <span class="text-muted">Operator</span>
+                                <span class="text-dark float-right font-weight-medium">{{$totalUserOperator}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Kategori Tiket</h4>
+                        <div id="campaign-v2" class="mt-2" style="height:383px; width:100%;"></div>
+                        <ul class="list-style-none mb-0">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Kategori Tiket</h4>
+                        <div class="net-income mt-4 position-relative" style="height:294px;"></div>
+                        <ul class="list-inline text-center mt-5 mb-2">
+                            <li class="list-inline-item text-muted font-italic">Kategori Tiket</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            @include('main.components.message')
+        </div>
+
+        <div class="row col-12">
+            <div class="card">
+                <img class="card-img-top" src="holder.js/100x180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">Semua Ticket</h4>
                     <div class="table-responsive">
                         <table id="table_data" class="table table-striped table-bordered no-wrap" style="width:100%">
                             <thead>
@@ -111,7 +247,7 @@
                                             <div class="d-flex">
                                                 <button id="{{ $item->id }}" type="button"
                                                     class="btn btn-danger btn-delete mr-2">Batalkan Ticket</button>
-                                                <a href="{{ url('user/ticket' . '/' . $item->id . '/edit') }}">
+                                                <a href="{{ url('admin/ticket' . '/' . $item->id . '/edit') }}">
                                                     <button type="button" class="btn btn-primary">Edit</button>
                                                 </a>
                                             </div>
@@ -129,12 +265,25 @@
                         </table>
                     </div>
 
-
                 </div>
             </div>
         </div>
-    </div>
+        <!-- *************************************************************** -->
+        <!-- End Sales Charts Section -->
+        <!-- *************************************************************** -->
+        <!-- *************************************************************** -->
+        <!-- Start Location and Earnings Charts Section -->
+        <!-- *************************************************************** -->
 
+        <!-- *************************************************************** -->
+        <!-- End Location and Earnings Charts Section -->
+        <!-- *************************************************************** -->
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
 
 
     <!-- Destroy Modal -->
@@ -143,7 +292,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Membatalkan Ticket Ini ?</h5>
+                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Membatalkan Ticket Ini ?
+                    </h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -161,8 +311,8 @@
     </div>
     <!-- Destroy Modal -->
 
-
 @endsection
+
 
 
 @section('app-script')
@@ -179,6 +329,7 @@ src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></sc
 </script>
 
 
+@include('home.script_admin')
 
 
 <script type="text/javascript">
@@ -221,8 +372,4 @@ src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></sc
 
     });
 </script>
-
-
-
-
 @endsection

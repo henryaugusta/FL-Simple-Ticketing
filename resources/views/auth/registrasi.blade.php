@@ -150,25 +150,24 @@
                                     @csrf
 
                                     <div class="form-group">
-                                        <label for="">Nama Karyawan</label>
+                                        <label for="">Nama</label>
                                         <input type="text" class="form-control" required name="nama"
-                                            placeholder="Nama Karyawan">
-                                        <small class="form-text text-muted">Nama Karyawan</small>
+                                            placeholder="Nama">
+                                        <small class="form-text text-muted">Nama</small>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="">Email Karyawan</label>
+                                        <label for="">Email</label>
                                         <input type="email" class="form-control" required name="email"
                                             placeholder="Email Karyawan">
-                                        <small class="form-text text-muted">Email Karyawan (Digunakan Untuk
-                                            Login)</small>
+                                        <small class="form-text text-muted">Email </small>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="">Password</label>
                                         <input type="text" class="form-control" required name="password"
                                             placeholder="Password">
-                                        <small class="form-text text-muted">Password Karyawan</small>
+                                        <small class="form-text text-muted">Password</small>
                                     </div>
 
 

@@ -39,6 +39,7 @@
                             <th>No</th>
                             <th>Judul Ticket</th>
                             <th>Deskripsi Ticket</th>
+                            <th>Operator</th>
                             <th>Status</th>
                             <th>Detail Data</th>
                         </tr>
@@ -49,6 +50,19 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->ticket_title }}</td>
                                 <td>{{ $item->ticket_detail }}</td>
+                                @if ($item->operator != null)
+                                    <td>{{ $item->operator->name }}
+                             
+                                    </td>
+                                @endif
+
+                                @if ($item->operator == null)
+                                    <td>
+                                        <button type="button" id="{{ $item->id }}"
+                                            class="btn btn-delegate btn-block waves-light btn-rounded btn-light txt-dark">Proses
+                                        </button>
+                                    </td>
+                                @endif
                                 <td>
                                     @if ($item->status == 3)
                                         <button type="button"
@@ -68,7 +82,7 @@
                                         <button id="{{ $item->id }}" type="button"
                                             class="btn btn-danger btn-delete mr-2">Batalkan Ticket</button>
                                         <a href="{{ url('user/ticket' . '/' . $item->id . '/edit') }}">
-                                            <button type="button" class="btn btn-primary">Edit</button>
+                                            <button type="button" class="btn btn-primary">Lihat Jawaban</button>
                                         </a>
                                     </div>
                                 </td>

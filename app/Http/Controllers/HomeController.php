@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discussion;
 use App\Models\TicketModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,24 +47,59 @@ class HomeController extends Controller
     public function homeUser()
     {
         $auth = Auth::user()->id;
-        $totalTicket = TicketModel::all()->where('sender_id','=',$auth)->count();
-        $totalTicketPending =TicketModel::where('sender_id','=',$auth)->where('status','=','3')->count(); 
-        $totalTicketSolved = TicketModel::where('sender_id','=',$auth)->where('status','=','1')->count();
-        $totalTicketProgress = TicketModel::where('sender_id','=',$auth)->where('status','=','2')->count();
+        $totalTicket = TicketModel::all()->where('sender_id', '=', $auth)->count();
+        $totalTicketPending = TicketModel::where('sender_id', '=', $auth)->where('status', '=', '3')->count();
+        $totalTicketSolved = TicketModel::where('sender_id', '=', $auth)->where('status', '=', '1')->count();
+        $totalTicketProgress = TicketModel::where('sender_id', '=', $auth)->where('status', '=', '2')->count();
 
-        $tickets = TicketModel::all();
+        $tickets =  TicketModel::where('sender_id', '=', $auth)->get();
         return view('home.user')
             ->with(compact('totalTicket', 'totalTicketPending', 'totalTicketSolved', 'totalTicketProgress', 'tickets'));
     }
     public function homeAdmin()
     {
         $totalTicket = TicketModel::all()->count();
-        $totalTicketPending =TicketModel::where('status','=','3')->count(); 
-        $totalTicketSolved = TicketModel::where('status','=','1')->count();
-        $totalTicketProgress = TicketModel::where('status','=','2')->count();
+        $totalTicketPending = TicketModel::where('status', '=', '3')->count();
+        $totalTicketSolved = TicketModel::where('status', '=', '1')->count();
+        $totalTicketProgress = TicketModel::where('status', '=', '2')->count();
+
+
+        $totalTicket0 = TicketModel::where('category', '=', '0')->count();
+        $totalTicket1 = TicketModel::where('category', '=', '1')->count();
+        $totalTicket2 = TicketModel::where('category', '=', '2')->count();
+        $totalTicket3 = TicketModel::where('category', '=', '3')->count();
+        $totalTicket4 = TicketModel::where('category', '=', '4')->count();
+        $totalTicket5 = TicketModel::where('category', '=', '5')->count();
+
+        $totalUser = User::all()->count();
+        $totalUserOperator = User::all()->where('role','=','2')->count();
+        $totalUserAdmin = User::all()->where('role','=','1')->count();
+        $totalUserUser = User::all()->where('role','=','3')->count();
+
+        $discuss = Discussion::where('type','=',null)->limit(3)->get();
 
         $tickets = TicketModel::all();
+
+        $cp = compact(
+            'discuss',
+            'totalTicket0',
+            'totalTicket1',
+            'totalTicket2',
+            'totalTicket3',
+            'totalTicket4',
+            'totalTicket5',
+            'totalUser',
+            'totalUserAdmin',
+            'totalUserOperator',
+            'totalUserUser',
+            'totalTicket',
+            'totalTicketPending',
+            'totalTicketSolved',
+            'totalTicketProgress',
+            'tickets'
+        );
+
         return view('home.admin')
-            ->with(compact('totalTicket', 'totalTicketPending', 'totalTicketSolved', 'totalTicketProgress', 'tickets'));
+            ->with($cp);
     }
 }
