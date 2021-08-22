@@ -61,7 +61,24 @@
 
             <h3 class="text-dark mr-1 mt-2"> <strong> Kategori Ticket : </strong></h3>
             <h3 class="text-dark">
-                {{$data->category_detail->name}}
+                @if ($data->category == 1)
+                    Masalah Jaringan
+                @endif
+                @if ($data->category == 2)
+                    Masalah Email
+                @endif
+                @if ($data->category == 3)
+                    Masalah Laptop
+                @endif
+                @if ($data->category == 4)
+                    Masalah Printer
+                @endif
+                @if ($data->category == 5)
+                    Masalah Aplikasi
+                @endif
+                @if ($data->category == 0)
+                    Masalah Lainnya
+                @endif
             </h3>
 
 

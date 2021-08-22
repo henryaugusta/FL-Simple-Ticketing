@@ -68,13 +68,3 @@ Route::get('/karyawan/{id}/delete', 'KaryawanController@destroy');
 Route::get('/karyawan/{id}/edit', 'KaryawanController@viewEdit');
 Route::post('/karyawan/{id}/edit', 'KaryawanController@edit');
 
-Route::prefix('kategori')->group(function () {
-    Route::get('tambah', 'CategoryController@viewCreate');
-    Route::post('tambah', 'CategoryController@store');
-    Route::get('manage', 'CategoryController@viewManage');
-    Route::get('{id}/delete', 'CategoryController@destroy');
-    Route::get('{id}/edit', 'CategoryController@viewEdit');
-    Route::post('{id}/edit', 'CategoryController@update');
-});
-
-

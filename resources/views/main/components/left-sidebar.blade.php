@@ -22,7 +22,6 @@
                     <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">Tracking Status Ticket</span></li>
 
-            
                     <li class="sidebar-item active">
                         <a class="sidebar-link" href="{{ URL('user/ticket/pending') }}" aria-expanded="false">
                             <i data-feather="tag" class="feather-icon"></i>
@@ -52,16 +51,6 @@
 
                     <li class="nav-small-cap"><span class="hide-menu">Tracking Status Ticket</span></li>
 
-                    @if (Auth::user()->role==1)
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ URL('process/ticket/undelegated') }}" aria-expanded="false">
-                            <i data-feather="tag" class="feather-icon"></i>
-                            <span class="hide-menu">Belum Didelegasikan
-                            </span>
-                        </a>
-                    </li>
-                    @endif
-                    
                     <li class="sidebar-item active">
                         <a class="sidebar-link" href="{{ URL('process/ticket/pending') }}" aria-expanded="false">
                             <i data-feather="tag" class="feather-icon"></i>
@@ -69,7 +58,6 @@
                             </span>
                         </a>
                     </li>
-                    
 
                     <li class="sidebar-item active">
                         <a class="sidebar-link" href="{{ URL('process/ticket/progress') }}" aria-expanded="false">
@@ -115,24 +103,6 @@
                             <a class="sidebar-link" href="{{ URL('karyawan/manage') }}" aria-expanded="false">
                                 <i data-feather="tag" class="feather-icon"></i>
                                 <span class="hide-menu">Manage User
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="nav-small-cap"><span class="hide-menu">Kategori</span></li>
-
-                        <li class="sidebar-item active">
-                            <a class="sidebar-link" href="{{ URL('kategori/tambah') }}" aria-expanded="false">
-                                <i data-feather="tag" class="feather-icon"></i>
-                                <span class="hide-menu">Tambah Kategori
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item active">
-                            <a class="sidebar-link" href="{{ URL('kategori/manage') }}" aria-expanded="false">
-                                <i data-feather="tag" class="feather-icon"></i>
-                                <span class="hide-menu">Manage Kategori
                                 </span>
                             </a>
                         </li>

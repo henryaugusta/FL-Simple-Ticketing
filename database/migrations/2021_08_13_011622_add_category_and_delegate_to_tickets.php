@@ -14,10 +14,9 @@ class AddCategoryAndDelegateToTickets extends Migration
     public function up()
     {
         Schema::table('tickets', function (Blueprint $table) {
-            $table->unsignedBigInteger('category')->nullable();
+            $table->string('category')->nullable();
             $table->unsignedBigInteger('delegate_id')->nullable();
             $table->foreign('delegate_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('category')->references('id')->on('ticket_categories')->onDelete('cascade');
         });
     }
 

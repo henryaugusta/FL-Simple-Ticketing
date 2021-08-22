@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
-use App\Models\TicketCategory;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Seeder;
@@ -24,8 +23,6 @@ class AdminSeeder extends Seeder
         $this->addUser("staff", "staff@gmail.com", "password","2");
 
 
-     
-
         $faker = Faker::create("id_ID");
         for ($i = 0; $i < 300; $i++) {
             try {
@@ -36,9 +33,6 @@ class AdminSeeder extends Seeder
             }
         }
     }
-
-
-
 
     public function addUser($name, $email, $password, $role)
     {

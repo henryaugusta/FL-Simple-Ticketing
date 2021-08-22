@@ -26,19 +26,15 @@ class TicketController extends Controller
             case 'complete':
                 $status_code = 1;
 
-            case 'undelegated':
-                $status_code = 123;
 
                 break;
 
             case 'mywork':
-                $tickets = TicketModel::where('delegate_id', '=', Auth::user()->id)
-                    ->where('status', '!=', 99)->get();
+                $tickets = TicketModel::where('delegate_id', '=', Auth::user()->id)->get();
                 $ticket_status = "";
                 $operators = User::where([
                     ['role', '=', '2'],
                 ])->get();
-
                 return view('ticket.admin.manage')->with(compact('ticket_status', 'tickets', 'operators'));
                 break;
 
@@ -51,15 +47,6 @@ class TicketController extends Controller
         $operators = User::where([
             ['role', '=', '2'],
         ])->get();
-
-        if (Auth::user()->role == 2) {
-            $tickets = TicketModel::where('delegate_id', '=', Auth::user()->id)->where('status', '=', $status_code)->get();
-        }
-
-
-        if ($status_code == 123) {
-            $tickets = TicketModel::where('delegate_id', '=', null)->where('status', '!=', 99)->get();
-        }
 
 
         return view('ticket.admin.manage')->with(compact('ticket_status', 'tickets', 'operators'));
