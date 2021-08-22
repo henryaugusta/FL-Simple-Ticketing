@@ -67,18 +67,26 @@
 
                                 @if ($item->operator != null)
                                     <td>{{ $item->operator->name }} <br>
-                                         <span id="{{$item->id}}" class="text-primary btn-delegate" style="cursor:pointer">(Ganti)</span>
+                                        <span id="{{ $item->id }}" class="text-primary btn-delegate"
+                                            style="cursor:pointer">(Ganti)</span>
                                     </td>
 
 
                                 @endif
 
                                 @if ($item->operator == null)
+                                    @if (Auth::user()->role == 2)
+                                    <td>
+                                        {{$item->operator}}
+                                    </td>
+                                    @else
                                     <td>
                                         <button type="button" id="{{ $item->id }}"
                                             class="btn btn-delegate btn-block waves-light btn-rounded btn-light txt-dark">Proses
                                         </button>
                                     </td>
+                                    @endif
+                             
                                 @endif
                                 <td>
                                     <div class="d-flex">
@@ -112,7 +120,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Membatalkan Ticket Ini ?</h5>
+                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Ingin Membatalkan Ticket Ini , <br>
+                        (Ticket tidak dapat dibuka dapat dibaca kembali)?</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -129,6 +138,7 @@
         </div>
     </div>
     <!-- Destroy Modal -->
+
 
     <!-- Modal -->
     <div class="modal fade" id="modal-delegate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
@@ -160,7 +170,7 @@
                     </form>
                 </div>
             </div>
-          
+
         </div>
     </div>
 

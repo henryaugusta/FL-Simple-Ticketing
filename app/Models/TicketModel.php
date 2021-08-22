@@ -11,10 +11,15 @@ class TicketModel extends Model
     use HasFactory;
 
     
-    protected $append = ['operator'];
+    protected $append = ['operator','category_detail'];
     
     function getOperatorAttribute()
     {
         return User::find($this->delegate_id);
+    }
+    
+    function getCategoryDetailAttribute()
+    {
+        return TicketCategory::find($this->category);
     }
 }

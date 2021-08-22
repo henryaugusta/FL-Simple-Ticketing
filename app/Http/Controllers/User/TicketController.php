@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Discussion;
+use App\Models\TicketCategory;
 use App\Models\TicketModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class TicketController extends Controller
 
     public function viewCreate()
     {
-        return view('ticket.add');
+        $categories = TicketCategory::whereNull('is_deleted')->get();
+        return view('ticket.add')->with(compact('categories'));
     }
 
     public function viewDetail($id){
@@ -33,6 +35,7 @@ class TicketController extends Controller
         $ticket_status = "Pending";
         return view('ticket.manage')->with(compact('ticket_status', 'tickets'));
     }
+    
     public function viewUserProgress()
     {
         $tickets = TicketModel::where('sender_id', '=', Auth::user()->id)
@@ -48,11 +51,11 @@ class TicketController extends Controller
         return view('ticket.manage')->with(compact('ticket_status', 'tickets'));
     }
 
-    public function deleteTicket(Request $request){
+    public function destroy(Request $request){
         $object = TicketModel::find($request->id);
-
+        $object->status="99";
         
-        if ($object->delete()) {
+        if ($object->save()) {
             return redirect('/user/ticket/pending')->with(["success" => "Berhasil Menghapus Ticket"]);
         } else {
             return redirect('/user/ticket/pending')->with(["error" => "Gagal Menghapus Ticket"]);

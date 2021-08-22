@@ -51,10 +51,11 @@ class HomeController extends Controller
         $totalTicketPending = TicketModel::where('sender_id', '=', $auth)->where('status', '=', '3')->count();
         $totalTicketSolved = TicketModel::where('sender_id', '=', $auth)->where('status', '=', '1')->count();
         $totalTicketProgress = TicketModel::where('sender_id', '=', $auth)->where('status', '=', '2')->count();
+        $totalTicketCanceled = TicketModel::where('sender_id', '=', $auth)->where('status', '=', 99)->count();
 
-        $tickets =  TicketModel::where('sender_id', '=', $auth)->get();
+        $tickets =  TicketModel::where('sender_id', '=', $auth)->where('status','<>',99)->get();
         return view('home.user')
-            ->with(compact('totalTicket', 'totalTicketPending', 'totalTicketSolved', 'totalTicketProgress', 'tickets'));
+            ->with(compact('totalTicket','totalTicketCanceled', 'totalTicketPending', 'totalTicketSolved', 'totalTicketProgress', 'tickets'));
     }
     public function homeAdmin()
     {
