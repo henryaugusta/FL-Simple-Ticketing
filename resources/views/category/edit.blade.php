@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Ticket</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Kategori</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Ticket</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Kirim Ticket</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Kategori</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Tambah</li>
                     </ol>
                 </nav>
             </div>
@@ -29,43 +29,24 @@
 
     <div class="card border-success">
         <div class="card-header bg-success">
-            <h4 class="mb-0 text-white">Buat Ticket Helpdesk</h4>
+            <h4 class="mb-0 text-white">Edit Kategori</h4>
         </div>
         <div class="card-body">
-            <h3 class="card-title">Buat Ticket Helpdesk</h3>
+            <h3 class="card-title">Edit Kategori : {{$datas->name}}</h3>
+
 
             <hr>
 
-            <form action="{{ url('user/ticket/create') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('kategori/'.$datas->id.'/edit') }}"  method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
-                    <label for="">Judul Ticket</label>
-                    <input type="text" class="form-control" required name="title_ticket" value="{{ old('title_ticket') }}"
-                        placeholder="Judul Ticket">
-                    <small class="form-text text-muted">Judul Ticket</small>
+                    <label for="">Nama Kategori</label>
+                    <input type="text" class="form-control" required name="nama" value="{{$datas->name}}" placeholder="Nama Kategori">
+                    <small class="form-text text-muted">Nama Kategori</small>
                 </div>
 
-                <div class="form-group">
-                    <label for="">Kategori Keluhan</label>
-                    <select required class="form-control" name="category" id="">
-                        <option>Pilih Kategori</option>
-                        @forelse ($categories as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
-                        @empty
-
-                        @endforelse
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Message / Deskripsi</label>
-                    <textarea class="form-control" name="message" id="" rows="5" placeholder="Message / Deskripsi Ticket"
-                        value="{{ old('message') }}"></textarea>
-                    <small class="form-text text-muted">Message / Deskripsi</small>
-                </div>
-
-                <button type="submit" class="btn btn-block btn-primary">Kirim Ticket</button>
+                <button type="submit" class="btn  btn-primary">Simpan Perubahan</button>
             </form>
         </div>
     </div>
@@ -127,6 +108,38 @@
                         console.log(err);
                     }
                 },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'id'
+                    },
+                    {
+                        data: 'nis',
+                        name: 'nis'
+                    },
+                    {
+                        data: 'nama',
+                        name: 'nama'
+                    },
+                    {
+                        data: 'kelas',
+                        name: 'kelas'
+                    },
+                    {
+                        data: 'asrama',
+                        name: 'asrama'
+                    },
+                    {
+                        data: 'jenjang',
+                        name: 'jenjang'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
+                    },
+
+                ]
             });
 
 
