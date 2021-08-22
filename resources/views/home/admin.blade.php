@@ -105,7 +105,7 @@
         <!-- End First Cards -->
         <!-- *************************************************************** -->
 
-
+{{-- #fix --}}
         <div class="row">
             <!-- Column -->
             <div class="col-md-6 col-lg-3 col-xlg-3">
