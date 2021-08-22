@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\Discussion;
+use App\Models\TicketCategory;
 use App\Models\TicketModel;
 use App\Models\User;
 use Exception;
@@ -50,6 +51,20 @@ class TicketSeeder extends Seeder
         // for ($i=0; $i < 4000; $i++) { 
         //     $this->addTicket();
         // }
+
+        $this->addCategory("Masalah Jaringan");
+        $this->addCategory("Masalah Email");
+        $this->addCategory("Masalah Laptop");
+        $this->addCategory("Masalah Printer");
+        $this->addCategory("Masalah Aplikasi");
+        $this->addCategory("Masalah Lainnya");
+
+    }
+
+    public function addCategory($name){
+        $data = new TicketCategory();
+        $data->name = $name;
+        $data->save();
     }
 
     public function addTicket()

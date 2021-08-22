@@ -107,6 +107,24 @@
                             </a>
                         </li>
 
+                        <li class="nav-small-cap"><span class="hide-menu">Kategori</span></li>
+
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="{{ URL('kategori/tambah') }}" aria-expanded="false">
+                                <i data-feather="tag" class="feather-icon"></i>
+                                <span class="hide-menu">Tambah Kategori
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="{{ URL('kategori/manage') }}" aria-expanded="false">
+                                <i data-feather="tag" class="feather-icon"></i>
+                                <span class="hide-menu">Manage Kategori
+                                </span>
+                            </a>
+                        </li>
+
                     @endif
 
                 @endif
