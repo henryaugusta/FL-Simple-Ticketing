@@ -108,7 +108,7 @@
 
         <div class="row">
             <!-- Column -->
-            <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="col-md-6 col-lg-4 col-xlg-3">
                 <div class="card card-hover">
                     <div class="p-2 bg-primary text-center">
                         <h1 class="font-light text-white">{{ $totalTicket }}</h1>
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <!-- Column -->
-            <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="col-md-6 col-lg-2 col-xlg-3">
                 <div class="card card-hover">
                     <div class="p-2 bg-cyan text-center">
                         <h1 class="font-light text-white">{{ $totalTicketProgress }}</h1>
@@ -126,7 +126,7 @@
                 </div>
             </div>
             <!-- Column -->
-            <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="col-md-6 col-lg-2 col-xlg-3">
                 <div class="card card-hover">
                     <div class="p-2 bg-success text-center">
                         <h1 class="font-light text-white">{{ $totalTicketSolved }}</h1>
@@ -135,11 +135,19 @@
                 </div>
             </div>
             <!-- Column -->
-            <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="col-md-6 col-lg-2 col-xlg-3">
                 <div class="card card-hover">
-                    <div class="p-2 bg-danger text-center">
+                    <div class="p-2 bg-warning text-center">
                         <h1 class="font-light text-white">{{ $totalTicketPending }}</h1>
                         <h6 class="text-white">Pending</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-2 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="p-2 bg-danger text-center">
+                        <h1 class="font-light text-white">{{ $totalTicketCanceled }}</h1>
+                        <h6 class="text-white">Dibatalkan</h6>
                     </div>
                 </div>
             </div>
@@ -207,7 +215,7 @@
             @include('main.components.message')
         </div>
 
-        <div class="row col-12">
+        <div class="row col-12 d-none">
             <div class="card">
                 <img class="card-img-top" src="holder.js/100x180/" alt="">
                 <div class="card-body">

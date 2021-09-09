@@ -21,6 +21,8 @@ class CreateTicketsTable extends Migration
             $table->string("ticket_detail")->nullable();
             $table->string("ticket_photo")->nullable();
             $table->string("status")->nullable();
+            $table->string("durasi")->nullable();
+            $table->string("priority")->nullable();
             $table->foreign("sender_id")->references("id")->on("users");
         });
     }

@@ -59,6 +59,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="">Skala Prioritas</label>
+                    <select required class="form-control" name="prioritas" id="">
+                        <option>Pilih Kategori</option>
+                        <option value="LOW">LOW</option>
+                        <option value="MEDIUM">MEDIUM</option>
+                        <option value="HIGH">HIGH</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="">Message / Deskripsi</label>
                     <textarea class="form-control" name="message" id="" rows="5" placeholder="Message / Deskripsi Ticket"
                         value="{{ old('message') }}"></textarea>

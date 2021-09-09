@@ -22,10 +22,9 @@ class TicketSeeder extends Seeder
     {
         $faker = Faker::create("id_ID");
 
-        $this->addUser("Admin", "admin@email.com", "password","1");
-        $this->addUser("user", "user@gmail.com", "password","3");
-        $this->addUser("staff", "staff@gmail.com", "password","2");
-
+        $this->addUser("Admin", "admin@email.com", "password", "1");
+        $this->addUser("user", "user@gmail.com", "password", "3");
+        $this->addUser("staff", "staff@gmail.com", "password", "2");
 
 
         //4-54
@@ -48,20 +47,21 @@ class TicketSeeder extends Seeder
             }
         }
 
-        // for ($i=0; $i < 4000; $i++) { 
+        // for ($i=0; $i < 4000; $i++) {
         //     $this->addTicket();
         // }
 
-        $this->addCategory("Masalah Jaringan");
-        $this->addCategory("Masalah Email");
-        $this->addCategory("Masalah Laptop");
-        $this->addCategory("Masalah Printer");
-        $this->addCategory("Masalah Aplikasi");
-        $this->addCategory("Masalah Lainnya");
+        $this->addCategory("Masalah Jaringan");  //1
+        $this->addCategory("Masalah Email");     //2
+        $this->addCategory("Masalah Laptop");    //3
+        $this->addCategory("Masalah Printer");    //4
+        $this->addCategory("Masalah Aplikasi");   //5
+        $this->addCategory("Masalah Lainnya");   // 6
 
     }
 
-    public function addCategory($name){
+    public function addCategory($name)
+    {
         $data = new TicketCategory();
         $data->name = $name;
         $data->save();

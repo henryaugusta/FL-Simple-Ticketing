@@ -29,17 +29,24 @@
 
     <div class="card border-success">
         <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">Edit Data Ticket No {{ $data->id }}</h4>
+            <h4 class="mb-0 text-white">Edit Data Ticket {{ $data->nomor_ticket }}</h4>
         </div>
         <div class="card-body">
 
             @csrf
 
+            <h1>Nomor Ticket {{$data->nomor_ticket}}</h1>
+
+            <h3 class="text-dark mr-1 mt-2"><strong> Durasi Pengerjaan : </strong></h3>
+            <h3 class="text-dark">
+                {{$data->duration_det}}
+            </h3>
+
             <div class="d-flex">
                 <h3 class="text-dark mr-2"><strong> Judul Keluhan : </strong></h3>
                 <h3 class="text-dark">{{ $data->ticket_title }}</h3>
             </div>
-            <h3 class="text-dark mr-1"> <strong> Message Ticket : </strong></h3>
+            <h3 class="text-dark mr-1"><strong> Message Ticket : </strong></h3>
             <h3 class="text-dark">{{ $data->ticket_detail }}</h3>
 
             <h4 class="text-dark">Status Ticket : </h4>
@@ -56,22 +63,21 @@
                 @endif
             </div>
 
-            <h3 class="text-dark mr-1 mt-2"> <strong> Pengirim : </strong></h3>
+            <h3 class="text-dark mr-1 mt-2"><strong> Pengirim : </strong></h3>
             <h3 class="text-dark">{{ $user->name }}</h3>
 
-            <h3 class="text-dark mr-1 mt-2"> <strong> Kategori Ticket : </strong></h3>
+            <h3 class="text-dark mr-1 mt-2"><strong> Kategori Ticket : </strong></h3>
             <h3 class="text-dark">
                 {{$data->category_detail->name}}
             </h3>
 
 
-
-            <h3 class="text-dark mr-1"> <strong> Tanggal Dibuat : </strong></h3>
+            <h3 class="text-dark mr-1"><strong> Tanggal Dibuat : </strong></h3>
             <h3 class="text-dark">{{ $data->created_at }}</h3>
 
 
             <div class="border p-2 round-1">
-                <h3 class="text-dark mr-1 mt-2"> <strong>Ticket Ini Sedang Ditangani Oleh : </strong></h3>
+                <h3 class="text-dark mr-1 mt-2"><strong>Ticket Ini Sedang Ditangani Oleh : </strong></h3>
                 @if ($data->delegate_id == null)
                     <h5> Ticket Ini Belum Ditakeover atau didelegasi oleh operator manapun </h5>
                 @else
@@ -80,7 +86,8 @@
 
                 @if (Auth::user()->role != 3)
                     <button type="button" id="{{ $data->id }}" class="btn btn-primary btn-delegate">Handover/Delegasikan
-                        Ticket</button>
+                        Ticket
+                    </button>
                 @endif
 
             </div>
@@ -88,15 +95,24 @@
             @if (Auth::user()->role == 1 || Auth::user()->role == 2)
 
                 <form action="{{ url('admin/ticket/' . $data->id . '/update_status') }}" method="post"
-                    enctype="multipart/form-data">
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <h3 class="text-dark mt-4">Ubah Status Ticket</h3>
                         <select required class="form-control" name="status" id="">
-                            <option>Pilih Status Baru</option>
-                            <option value="3">Pending</option>
-                            <option value="2">Progress</option>
-                            <option value="1">Selesai</option>
+                            <option @if($data->status==3) selected @endif value="3">Pending</option>
+                            <option @if($data->status==2) selected @endif value="2">Progress</option>
+                            <option @if($data->status==1) selected @endif value="1">Selesai</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <h3 class="text-dark mt-4">Ubah Prioritas</h3>
+                        <select required class="form-control" name="priority" id="">
+                            <option>Pilih Prioritas</option>
+                            <option @if($data->priority=="HIGH") selected @endif value="HIGH">HIGH 🔥</option>
+                            <option @if($data->priority=="MEDIUM") selected @endif value="MEDIUM">MEDIUM</option>
+                            <option @if($data->priority=="LOW") selected @endif value="LOW">LOW</option>
                         </select>
                     </div>
 
@@ -117,7 +133,7 @@
         </div>
         <div class="card-body">
             <div class="chat-box scrollable position-relative ps-container ps-theme-default"
-                style="height: calc(100vh - 100px);" data-ps-id="1456ff32-4cc1-fff2-5065-9da0363bf007">
+                 style="height: calc(100vh - 100px);" data-ps-id="1456ff32-4cc1-fff2-5065-9da0363bf007">
                 <ul class="chat-list list-style-none ">
 
                     @forelse ($discussions as $item)
@@ -128,11 +144,12 @@
                                     <div class="msg d-inline-block mb-1 chat-text">
                                         <h6> {{ $item->message }} pada {{ $item->created_at }} </h6>
                                     </div>
+                                </div>
                             </li>
                         @else
 
                             @if ($item->user_detail->role == 2 || $item->user_detail->role == 1)
-                                <!--chat Row admin -->
+                            <!--chat Row admin -->
                                 <li class="chat-item list-style-none mt-3">
                                     <div class="chat-content d-inline-block pl-3">
                                         <h6 class="font-weight-medium">{{ $item->user_detail->name }} (Operator)</h6>
@@ -140,6 +157,7 @@
                                             <h4> {{ $item->message }} </h4>
                                         </div>
                                         <h6 class="">{{ $item->created_at }}</h6>
+                                    </div>
                                 </li>
                             @endif
                             @if ($item->user_detail->role == 3)
@@ -160,10 +178,10 @@
                     @empty
 
                         <div class="alert alert-primary" role="alert">
-                            <strong>Belum Ada Diskusi/Tanggapan, Silakan Menambahkan Pesan Melalui Kolom Dibawah</strong>
+                            <strong>Belum Ada Diskusi/Tanggapan, Silakan Menambahkan Pesan Melalui Kolom
+                                Dibawah</strong>
                         </div>
                     @endforelse
-
 
 
                 </ul>
@@ -187,7 +205,7 @@
                                 @if (Auth::user()->id == $data->delegate_id)
                                     <div class="input-field mt-0 mb-0">
                                         <input required id="textarea1" name="message" placeholder="Type and enter"
-                                            class="form-control border-0" type="text">
+                                               class="form-control border-0" type="text">
                                     </div>
                                 @else
                                     <input type="number" name="" class="d-none" required id="">
@@ -201,7 +219,7 @@
                                 @else
                                     <div class="input-field mt-0 mb-0">
                                         <input required id="textarea1" name="message" placeholder="Type and enter"
-                                            class="form-control border-0" type="text">
+                                               class="form-control border-0" type="text">
                                     </div>
                                 @endif
                             @endif
@@ -211,7 +229,7 @@
                             @if (Auth::user()->role == 2 && $data->delegate_id != null)
                                 @if (Auth::user()->id == $data->delegate_id)
                                     <a class="btn-circle btn-lg btn-cyan float-right text-white" href="#"
-                                        onclick="document.getElementById('chat-submit').submit();;return false;">
+                                       onclick="document.getElementById('chat-submit').submit();;return false;">
                                         <i class="fas fa-paper-plane"></i></a>
                                 @else
                                     <input type="number" name="" class="d-none" required id="">
@@ -222,7 +240,7 @@
 
                                 @else
                                     <a class="btn-circle btn-lg btn-cyan float-right text-white" href="#"
-                                        onclick="document.getElementById('chat-submit').submit();;return false;">
+                                       onclick="document.getElementById('chat-submit').submit();;return false;">
                                         <i class="fas fa-paper-plane"></i></a>
                                 @endif
 
@@ -244,7 +262,7 @@
     @if (Auth::user()->role == 1 || Auth::user()->role == 2)
         <!-- Handover Modal -->
         <div class="modal fade" id="modal-delegate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-            aria-hidden="true">
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -268,7 +286,9 @@
                                     @endforelse
                                 </select>
 
-                                <button type="submit" id="" class="btn mt-4 btn-primary btn-block">Handover Ticket</button>
+                                <button type="submit" id="" class="btn mt-4 btn-primary btn-block">Handover Ticket
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -291,22 +311,24 @@
 
 @section('app-script')
     <script type="text/javascript"
-        src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
+            src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
     </script>
     <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+            src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
     </script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
     </script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
     </script>
 
 
 
 
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             var table = $('#table_data').DataTable({
                 processing: true,
                 serverSide: true,
@@ -323,14 +345,14 @@
             });
 
 
-            $('body').on("click", ".btn-add-new", function() {
+            $('body').on("click", ".btn-add-new", function () {
                 var id = $(this).attr("id")
                 $(".btn-destroy").attr("id", id)
                 $("#insert-modal").modal("show")
             });
 
 
-            $('body').on("click", ".btn-delegate", function() {
+            $('body').on("click", ".btn-delegate", function () {
                 var id = $(this).attr("id")
                 document.getElementById("id_ticket_delegate").value = id;
                 $("#modal-delegate").modal("show")
@@ -338,12 +360,12 @@
 
 
             // Edit & Update
-            $('body').on("click", ".btn-edit", function() {
+            $('body').on("click", ".btn-edit", function () {
                 var id = $(this).attr("id")
                 $.ajax({
                     url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
                     method: "GET",
-                    success: function(response) {
+                    success: function (response) {
                         $("#edit-modal").modal("show")
                         console.log(response)
                         $("#id").val(response.id)
@@ -355,7 +377,7 @@
             });
 
             // Reset Password
-            $('body').on("click", ".btn-res-pass", function() {
+            $('body').on("click", ".btn-res-pass", function () {
                 var id = $(this).attr("id")
                 $(".btn-reset").attr("id", id)
                 $("#reset-password-modal").modal("show")

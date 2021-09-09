@@ -9,13 +9,12 @@
             bindto: '#campaign-v2',
             data: {
                 columns: [
-                    ['Jaringan', 200],
-                    ['Email', 100],
-                    ['Laptop', 100],
-                    ['Software', 100],
-                    ['Printer', 100],
-                    ['Aplikasi', 100],
-                    ['Lainnya', 100],
+                    ['Jaringan', {{$totalTicket1}}],
+                    ['Email', {{$totalTicket2}}],
+                    ['Laptop', {{$totalTicket3}}],
+                    ['Printer', {{$totalTicket4}}],
+                    ['Aplikasi', {{$totalTicket5}}],
+                    ['Lainnya', {{$totalTicket6}}],
                 ],
 
                 type: 'donut',
@@ -105,7 +104,7 @@
                     {{$totalTicket3}},
                     {{$totalTicket4}},
                     {{$totalTicket5}},
-                    {{$totalTicket0}},
+                    {{$totalTicket6}},
                 ]
             ]
         };

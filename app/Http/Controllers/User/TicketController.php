@@ -35,7 +35,7 @@ class TicketController extends Controller
         $ticket_status = "Pending";
         return view('ticket.manage')->with(compact('ticket_status', 'tickets'));
     }
-    
+
     public function viewUserProgress()
     {
         $tickets = TicketModel::where('sender_id', '=', Auth::user()->id)
@@ -54,7 +54,7 @@ class TicketController extends Controller
     public function destroy(Request $request){
         $object = TicketModel::find($request->id);
         $object->status="99";
-        
+
         if ($object->save()) {
             return redirect('/user/ticket/pending')->with(["success" => "Berhasil Menghapus Ticket"]);
         } else {
@@ -96,6 +96,7 @@ class TicketController extends Controller
         $object->sender_id = Auth::user()->id;
         $object->ticket_title = $request->title_ticket;
         $object->category= $request->category;
+        $object->priority= $request->prioritas;
         $object->ticket_detail = $request->message;
         $object->status = 3;
 
@@ -106,7 +107,7 @@ class TicketController extends Controller
             $objectdis->message = $request->message;
             $objectdis->topic = $object->id;
             $objectdis->save();
-    
+
 
             return back()->with(["success" => "Berhasil Mengirim Ticket, Silakan Lihat Status pada Menu Tracking"]);
         } else {

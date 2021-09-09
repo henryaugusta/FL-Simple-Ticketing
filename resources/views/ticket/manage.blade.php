@@ -34,10 +34,13 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
-                    <thead class="bg-primary text-white">
+                    <thead class=" ">
                         <tr>
                             <th>No</th>
+                            <th>Kode Ticket</th>
+                            <th>Prioritas</th>
                             <th>Judul Ticket</th>
+                            <th>Durasi</th>
                             <th>Deskripsi Ticket</th>
                             <th>Operator</th>
                             <th>Status</th>
@@ -48,11 +51,14 @@
                         @forelse ($tickets as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->nomor_ticket }}</td>
+                                <td>{{ $item->priority }}</td>
                                 <td>{{ $item->ticket_title }}</td>
+                                <td>{{ $item->duration_det}}</td>
                                 <td>{{ $item->ticket_detail }}</td>
                                 @if ($item->operator != null)
                                     <td>{{ $item->operator->name }}
-                             
+
                                     </td>
                                 @endif
 

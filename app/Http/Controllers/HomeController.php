@@ -63,14 +63,15 @@ class HomeController extends Controller
         $totalTicketPending = TicketModel::where('status', '=', '3')->count();
         $totalTicketSolved = TicketModel::where('status', '=', '1')->count();
         $totalTicketProgress = TicketModel::where('status', '=', '2')->count();
+        $totalTicketCanceled = TicketModel::where('status', '=', 99)->count();
 
 
-        $totalTicket0 = TicketModel::where('category', '=', '0')->count();
         $totalTicket1 = TicketModel::where('category', '=', '1')->count();
         $totalTicket2 = TicketModel::where('category', '=', '2')->count();
         $totalTicket3 = TicketModel::where('category', '=', '3')->count();
         $totalTicket4 = TicketModel::where('category', '=', '4')->count();
         $totalTicket5 = TicketModel::where('category', '=', '5')->count();
+        $totalTicket6 = TicketModel::where('category', '=', '6')->count();
 
         $totalUser = User::all()->count();
         $totalUserOperator = User::all()->where('role','=','2')->count();
@@ -83,15 +84,16 @@ class HomeController extends Controller
 
         $cp = compact(
             'discuss',
-            'totalTicket0',
             'totalTicket1',
             'totalTicket2',
             'totalTicket3',
             'totalTicket4',
             'totalTicket5',
+            'totalTicket6',
             'totalUser',
             'totalUserAdmin',
             'totalUserOperator',
+            'totalTicketCanceled',
             'totalUserUser',
             'totalTicket',
             'totalTicketPending',

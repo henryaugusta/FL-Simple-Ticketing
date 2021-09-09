@@ -68,6 +68,9 @@ Route::get('/karyawan/{id}/delete', 'KaryawanController@destroy');
 Route::get('/karyawan/{id}/edit', 'KaryawanController@viewEdit');
 Route::post('/karyawan/{id}/edit', 'KaryawanController@edit');
 
+Route::get('/kirim-email', 'EmailController@index');
+
+
 Route::prefix('kategori')->group(function () {
     Route::get('tambah', 'CategoryController@viewCreate');
     Route::post('tambah', 'CategoryController@store');
